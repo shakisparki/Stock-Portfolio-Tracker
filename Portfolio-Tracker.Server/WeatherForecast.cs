@@ -1,4 +1,4 @@
-namespace StockPortfolio.Server
+namespace Portfolio_Tracker.Server
 {
     public class WeatherForecast
     {

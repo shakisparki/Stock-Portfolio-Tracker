@@ -1,6 +1,0 @@
-@StockPortfolio.Server_HostAddress = http://localhost:5027
-
-GET {{StockPortfolio.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

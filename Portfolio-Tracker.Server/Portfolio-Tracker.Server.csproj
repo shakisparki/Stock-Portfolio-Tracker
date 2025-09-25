@@ -4,9 +4,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SpaRoot>..\stockportfolio.client</SpaRoot>
+    <RootNamespace>Portfolio_Tracker.Server</RootNamespace>
+    <SpaRoot>..\portfolio-tracker.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:60701</SpaProxyServerUrl>
+    <SpaProxyServerUrl>https://localhost:53771</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\stockportfolio.client\stockportfolio.client.esproj">
+    <ProjectReference Include="..\portfolio-tracker.client\portfolio-tracker.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

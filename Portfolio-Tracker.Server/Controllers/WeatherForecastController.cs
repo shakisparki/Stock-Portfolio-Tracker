@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace StockPortfolio.Server.Controllers
+namespace Portfolio_Tracker.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

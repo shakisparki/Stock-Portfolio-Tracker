@@ -57,13 +57,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release
+        run: dotnet publish ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj -c Release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: Portfolio-Tracker.Server/bin/Release/net9.0
+          path: ./Portfolio-Tracker.Server/bin/Release/net9.0/publish
   
   deploy:
     name: Deploy WebApp

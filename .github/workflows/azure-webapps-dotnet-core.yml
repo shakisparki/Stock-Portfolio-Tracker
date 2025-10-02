@@ -17,7 +17,7 @@
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-name: Build and deploy ASP.Net Core app to an Azure Web App
+name: Build and deploy ASP.Net Core app and Infra to an Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: your-app-name    # set this to the name of your Azure Web App
@@ -33,7 +33,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  buildApp:
+    name: Build WebApp
     runs-on: ubuntu-latest
 
     steps:
@@ -64,11 +65,31 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
+  deployInfra:
+    name: Deploy Infrastructure
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Bicep file
+      run: |
+        az deployment group create \
+          --location "westeurope" \
+          --template-file main.bicep
+  
+  deployApp:
+    name: Deploy WebApp
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    needs: build
+    needs: buildApp
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

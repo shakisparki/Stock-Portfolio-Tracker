@@ -83,7 +83,7 @@ jobs:
       run: |
         az deployment group create \
           --resource-group "RGStockPortfolio" \
-          --template-file main.bicep
+          --template-file .github/workflows/main.bicep
   
   deployApp:
     name: Deploy WebApp

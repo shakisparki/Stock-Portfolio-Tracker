@@ -33,7 +33,7 @@ permissions:
   contents: read
 
 jobs:
-  buildApp:
+  build:
     name: Build WebApp
     runs-on: ubuntu-latest
 
@@ -64,33 +64,13 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
-  deployInfra:
-    name: Deploy Infrastructure
-    runs-on: ubuntu-latest
-    needs: buildApp
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy Bicep file
-      run: |
-        az deployment group create \
-          --resource-group "RGStockPortfolio" \
-          --template-file .github/workflows/main.bicep
   
-  deployApp:
+  deploy:
     name: Deploy WebApp
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    needs: deployInfra
+    needs: build
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

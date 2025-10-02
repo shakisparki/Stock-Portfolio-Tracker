@@ -82,7 +82,8 @@ jobs:
     - name: Deploy Bicep file
       run: |
         az deployment group create \
-          --location "westeurope" \
+          --location "uksouth" \
+          --resource-group "RGStockPortfolio" \
           --template-file main.bicep
   
   deployApp:

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Portfolio_Tracker.Server.Data.Entities;
+using Portfolio_Tracker.Server.Identity.Entities;
 
 namespace Portfolio_Tracker.Server.Identity
 {

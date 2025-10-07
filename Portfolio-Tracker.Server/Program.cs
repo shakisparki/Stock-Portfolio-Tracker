@@ -3,6 +3,7 @@ using Identity.Server;
 using Scalar.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,21 @@ var app = builder.Build();
 
 app.UseDefaultFiles();
 app.MapStaticAssets();
+
 app.MapIdentityApi<IdentityUser>();
+app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager,
+    [FromBody] object empty) =>
+{
+    if (empty != null)
+    {
+        //log-out of cookie based authentication
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+    return Results.Unauthorized();
+})
+.WithOpenApi()
+.RequireAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

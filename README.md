@@ -1,3 +1,5 @@
+[![Build and Deploy](https://github.com/shakisparki/Stock-Portfolio-Tracker/actions/workflows/azure-webapps-dotnet-core.yml/badge.svg)](https://github.com/shakisparki/Stock-Portfolio-Tracker/actions/workflows/azure-webapps-dotnet-core.yml)
+
 # Stock-Portfolio-Tracker
 A simple stock portfolio tracker. This application allows users to input their stock holdings and visualize their portfolio performance over time.
 

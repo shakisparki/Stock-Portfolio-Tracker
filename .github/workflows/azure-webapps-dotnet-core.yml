@@ -85,8 +85,8 @@ jobs:
             agentIP=$(curl -s https://api.ipify.org)
             az postgres flexible-server firewall-rule create \
               --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
-              --server "${{ env.AZURE_POSTGRE_SERVER }}" \
-              --name "GitHubRunnerRule" \
+              --name "${{ env.AZURE_POSTGRE_SERVER }}" \
+              --rule-name "GitHubRunnerRule" \
               --start-ip-address $agentIP \
               --end-ip-address $agentIP
 
@@ -100,8 +100,8 @@ jobs:
         run: |
             az postgres flexible-server firewall-rule delete \
               --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
-              --server "${{ env.AZURE_POSTGRE_SERVER }}" \
-              --name "GitHubRunnerRule"
+              --name "${{ env.AZURE_POSTGRE_SERVER }}" \
+              --rule-name "GitHubRunnerRule"
 
   deploy:
     name: Deploy WebApp

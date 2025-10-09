@@ -101,7 +101,8 @@ jobs:
             az postgres flexible-server firewall-rule delete \
               --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
               --name "${{ env.AZURE_POSTGRE_SERVER }}" \
-              --rule-name "GitHubRunnerRule"
+              --rule-name "GitHubRunnerRule" \
+              --yes
 
   deploy:
     name: Deploy WebApp

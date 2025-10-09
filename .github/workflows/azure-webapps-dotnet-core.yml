@@ -70,6 +70,7 @@ jobs:
   migrations:
     name: Apply Database Migrations
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
@@ -83,8 +84,8 @@ jobs:
         run: |
             agentIP=$(curl -s https://api.ipify.org)
             az postgres flexible-server firewall-rule create \
-              --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-              --server-name ${{ env.AZURE_POSTGRE_SERVER }} \
+              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
+              --server-name "${{ env.AZURE_POSTGRE_SERVER }}" \
               --name "GitHubRunnerRule" \
               --start-ip-address $agentIP \
               --end-ip-address $agentIP
@@ -98,8 +99,8 @@ jobs:
       - name: Delist IP for Azure Postgre Server
         run: |
             az postgres flexible-server firewall-rule delete \
-              --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-              --server-name ${{ env.AZURE_POSTGRE_SERVER }}\
+              --resource-group "${{ env.AZURE_RESOURCE_GROUP }}" \
+              --server-name "${{ env.AZURE_POSTGRE_SERVER }}" \
               --name "GitHubRunnerRule"
 
   deploy:
@@ -107,7 +108,7 @@ jobs:
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    needs: build
+    needs: migrations
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

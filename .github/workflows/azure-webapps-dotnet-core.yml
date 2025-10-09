@@ -19,8 +19,10 @@
 
 name: Build and deploy ASP.Net Core app and Infra to an Azure Web App
 
-env:
+env: 
+  AZURE_RESOURCE_GROUP: RGStockPortfolio    # set this to the name of your Azure Resource group
   AZURE_WEBAPP_NAME: StockPortfolioWebApp    # set this to the name of your Azure Web App
+  AZURE_POSTGRE_SERVER: portfoliowebapp-server    # set this to the name of your Azure postgre server
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '9'                 # set this to the .NET Core version to use
 
@@ -59,18 +61,47 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj -c Release
 
-      - name: Apply Identity Database Migrations
-        run: |
-          dotnet tool install --global dotnet-ef
-          export PATH="$PATH:/home/runner/.dotnet/tools"
-          dotnet ef database update --project ./Identity.Server/Identity.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioIdentityDbContext --connection "${{ secrets.CONNECTIONSTRINGS_IDENTITYCONNECTION }}"
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
           path: ./Portfolio-Tracker.Server/bin/Release/net9.0/publish
   
+  migrations:
+    name: Apply Database Migrations
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Whitelist IP for Azure Postgre Server
+        run: |
+            agentIP=$(curl -s https://api.ipify.org)
+            az postgres flexible-server firewall-rule create \
+              --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+              --server-name ${{ env.AZURE_POSTGRE_SERVER }} \
+              --name "GitHubRunnerRule" \
+              --start-ip-address $agentIP \
+              --end-ip-address $agentIP
+
+      - name: Apply Identity Database Migrations
+        run: |
+          dotnet tool install --global dotnet-ef
+          export PATH="$PATH:/home/runner/.dotnet/tools"
+          dotnet ef database update --project ./Identity.Server/Identity.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioIdentityDbContext --connection "${{ secrets.CONNECTIONSTRINGS_IDENTITYCONNECTION }}"
+
+      - name: Delist IP for Azure Postgre Server
+        run: |
+            az postgres flexible-server firewall-rule delete \
+              --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+              --server-name ${{ env.AZURE_POSTGRE_SERVER }}\
+              --name "GitHubRunnerRule"
+
   deploy:
     name: Deploy WebApp
     permissions:

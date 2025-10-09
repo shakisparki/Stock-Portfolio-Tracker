@@ -59,6 +59,12 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj -c Release
 
+      - name: Apply Identity Database Migrations
+        run: |
+          dotnet tool install --global dotnet-ef
+          export PATH="$PATH:/home/runner/.dotnet/tools"
+          dotnet ef database update --project ./Identity.Server/Identity.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioIdentityDbContext
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:

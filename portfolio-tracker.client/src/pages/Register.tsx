@@ -12,7 +12,7 @@ const Register: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            setError("Passwords do not match!");
             return;
         }
         console.log("Registering:", { email, password });
@@ -30,7 +30,10 @@ const Register: React.FC = () => {
                 //onLogin();
                 navigate("/dashboard");
             } else {
-                setError("Invalid credentials");
+                const result = await response.json();
+                const firstErrorKey = Object.keys(result.errors)[0];
+
+                setError(result.errors[firstErrorKey][0]);
             }
         } catch {
             setError("Registration failed");

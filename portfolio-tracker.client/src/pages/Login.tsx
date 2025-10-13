@@ -15,7 +15,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         e.preventDefault();
         setError("");
         try {
-            const response = await fetch("https://localhost:7172/login?useSessionCookies=true", {
+             /*https://localhost:7172/register*/
+            const response = await fetch("/login?useSessionCookies=true", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

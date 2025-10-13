@@ -14,9 +14,8 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, onLogout }) => {
                 <span>Stock Tracker</span>
             </a>
             <div className="navbar-links">
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+                <a href="/#features">Features</a>
+                <a href="/about">About</a>
                 {isLoggedIn && <a href="/dashboard">Dashboard</a>}
             </div>
             {

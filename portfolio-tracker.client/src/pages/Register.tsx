@@ -18,7 +18,8 @@ const Register: React.FC = () => {
         console.log("Registering:", { email, password });
         setError("");
         try {
-            const response = await fetch("https://localhost:7172/register", {
+            /*https://localhost:7172/register*/
+            const response = await fetch("/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

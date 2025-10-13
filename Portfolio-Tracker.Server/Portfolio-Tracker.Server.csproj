@@ -12,19 +12,19 @@
 
   <ItemGroup>
     <Compile Remove="DTOs\**" />
-    <Compile Remove="Identity\Migrations\**" />
+    <Compile Remove="Identity\**" />
     <Compile Remove="Models\**" />
     <Compile Remove="Services\**" />
     <Content Remove="DTOs\**" />
-    <Content Remove="Identity\Migrations\**" />
+    <Content Remove="Identity\**" />
     <Content Remove="Models\**" />
     <Content Remove="Services\**" />
     <EmbeddedResource Remove="DTOs\**" />
-    <EmbeddedResource Remove="Identity\Migrations\**" />
+    <EmbeddedResource Remove="Identity\**" />
     <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="DTOs\**" />
-    <None Remove="Identity\Migrations\**" />
+    <None Remove="Identity\**" />
     <None Remove="Models\**" />
     <None Remove="Services\**" />
   </ItemGroup>
@@ -50,10 +50,6 @@
     <ProjectReference Include="..\portfolio-tracker.client\portfolio-tracker.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Identity\" />
   </ItemGroup>
 
 </Project>

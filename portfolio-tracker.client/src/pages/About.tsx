@@ -34,19 +34,19 @@ const About: React.FC = () => {
                     <h2>Meet the Team</h2>
                     <div className="team-grid">
                         <div className="team-card">
-                            <img src={img3} alt="Team Member" />
+                            <img src={img3} alt="Photo by Christina @ wocintechchat.com"/>
                             <h3>Ngozi Smith</h3>
                             <p>Founder & CEO</p>
                         </div>
 
                         <div className="team-card">
-                            <img src={img2} alt="Team Member" />
+                            <img src={img2} alt="Photo by Willian Souza"/>
                             <h3>Alex Carter</h3>
                             <p>Lead Developer</p>
                         </div>
 
                         <div className="team-card">
-                            <img src={img1} alt="Team Member" />
+                            <img src={img1} alt="Photo by Clay Elliot"/>
                             <h3>Morgan Patel</h3>
                             <p>Product Designer</p>
                         </div>

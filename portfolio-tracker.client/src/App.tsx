@@ -6,8 +6,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/account/Login";
+import Register from "./pages/account/Register";
+import ForgotPassword from "./pages/account/ForgotPassword";
+import ResetPassword from "./pages/account/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 
 const App: React.FC = () => {
@@ -22,7 +24,9 @@ const App: React.FC = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/login" element={isLoggedIn ? <Dashboard /> : <Login onLogin={login} />} />
-                        <Route path="/register" element={isLoggedIn ? <Dashboard /> : <Register/>} />
+                        <Route path="/register" element={isLoggedIn ? <Dashboard /> : <Register />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/reset-password/:token" element={<ResetPassword />} />
                         <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Login onLogin={login} />} />
                         {/* Add other routes as needed */}
                     </Routes>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 interface LoginProps {
     onLogin: () => void;
 }
@@ -67,6 +67,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                         Login
                     </button>
                 </form>
+
+                <p className="auth-footer">
+                    Forgot your password?{" "}
+                    <Link to="/forgot-password" className="auth-link">
+                        Reset Password
+                    </Link>
+                </p>
 
                 <p className="auth-footer">
                     Don't have an account?{" "}

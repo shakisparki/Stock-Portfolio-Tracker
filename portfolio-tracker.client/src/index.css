@@ -265,3 +265,112 @@ a.btn-primary, .btn-primary {
     .auth-link:hover {
         text-decoration: underline;
     }
+
+/* === About Page === */
+.about-page {
+    background-color: #f9fafb;
+    color: #333;
+}
+
+/* Hero */
+.about-hero {
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.about-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-hero h1 {
+    font-size: 2.5rem;
+    color: #1e1b4b;
+    margin-bottom: 12px;
+}
+
+.about-hero p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Mission */
+.about-mission {
+    background-color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-mission h2 {
+    font-size: 2rem;
+    color: #1e1b4b;
+    margin-bottom: 20px;
+}
+
+.about-mission p {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Team */
+.about-team {
+    background-color: #eef2ff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.team-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .team-card img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        object-fit: cover;
+        height: 220px;
+    }
+
+    .team-card h3 {
+        color: #1e1b4b;
+        margin-bottom: 4px;
+    }
+
+    .team-card p {
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+
+    .about-mission h2, .about-team h2 {
+        font-size: 1.6rem;
+    }
+}

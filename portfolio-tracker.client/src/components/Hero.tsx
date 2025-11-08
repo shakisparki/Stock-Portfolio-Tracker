@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
                     Monitor your investments, visualize performance, and stay on top of the
                     market all in one place.
                 </p>
-                <button className="btn-primary">Get Started</button>
+                <a href="/dashboard" className="btn-primary">Get Started</a>
             </div>
         </section>
     );

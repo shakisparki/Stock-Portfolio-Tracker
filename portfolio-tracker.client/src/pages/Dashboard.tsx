@@ -1,10 +1,12 @@
 import React from "react";
 import "../index.css";
+import Portfolio from "./Portfolio";
 
 const Dashboard: React.FC = () => {
     return (
         <main>
-            <h1 style={{margin: "200px 200px 200px 200px"} }>WELCOME TO DASHBOARD BRO!</h1>
+            {/*<h1 style={{ margin: "200px 200px 200px 200px" }}>WELCOME TO DASHBOARD BRO!</h1>*/}
+            <Portfolio/>
         </main>
     );
 };

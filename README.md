@@ -4,7 +4,7 @@
 A simple stock portfolio tracker. This application allows users to input their stock holdings and visualize their portfolio performance over time.
 
 ## Run/Test
-Visit http://stockportfoliowebapp.azurewebsites.net/ to use stock portfolio tracker online.
+Visit https://stockportfoliowebapp.azurewebsites.net/ to use stock portfolio tracker online.
 
 ## Development
 Stock portfolio tracker is built using **React (19), Typescript, ASP.NET Core (.NET 9), PostgreSQL, REST API, ASP.NET Core Identity, Entity Framework Core, HTML and CSS**

@@ -90,9 +90,6 @@ jobs:
               --start-ip-address $agentIP \
               --end-ip-address $agentIP
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-        
       - name: Apply Identity Database Migrations
         run: |
           dotnet tool install --global dotnet-ef

@@ -11,6 +11,7 @@ import Register from "./pages/account/Register";
 import ForgotPassword from "./pages/account/ForgotPassword";
 import ResetPassword from "./pages/account/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import { ProtectedRoute } from "./components/ProtectedRoute"
 
 const App: React.FC = () => {
     const {isLoggedIn, login, logout } = useAuth();
@@ -20,15 +21,23 @@ const App: React.FC = () => {
                 <Router>
                     <Navbar isLoggedIn={isLoggedIn} onLogout={logout} />
                     <Routes>
-
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/login" element={isLoggedIn ? <Dashboard /> : <Login onLogin={login} />} />
-                        <Route path="/register" element={isLoggedIn ? <Dashboard /> : <Register />} />
+                        {/*Account routes*/}
+                        <Route path="/login" element={<Login onLogin={login} isLoggedIn={isLoggedIn} />} />
+                        <Route path="/register" element={<Register isLoggedIn={isLoggedIn} />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/reset-password/:token" element={<ResetPassword />} />
-                        <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Login onLogin={login} />} />
-                        {/* Add other routes as needed */}
+
+                        {/*Anonymous routes*/}
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+
+                        {/*Authenticated routes*/}
+                        <Route path="/dashboard" element={
+                            <ProtectedRoute isLoggedIn={isLoggedIn} redirectUrl="/login?redirectUrl=/dashboard">
+                                <Dashboard />
+                            </ProtectedRoute>
+                        } />
+ 
                     </Routes>
                     <Footer />
                 </Router>

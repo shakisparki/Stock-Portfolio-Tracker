@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, Navigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 interface LoginProps {
+    isLoggedIn: boolean
     onLogin: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC<LoginProps> = ({ isLoggedIn, onLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    const url = useLocation();
+    const params = new URLSearchParams(url.search);
+    const redirectUrl = params.get("redirectUrl");
+    const navigateUrl = redirectUrl !== null && redirectUrl !== "" ? redirectUrl : "/dashboard";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,7 +34,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             });
             if (response.ok) {
                 onLogin();
-                navigate("/dashboard");
+                navigate(navigateUrl);
             } else {
                 setError("Invalid credentials");
             }
@@ -36,6 +42,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             setError("Login failed" + exceptionVar);
         }
     };
+
+    if (isLoggedIn) {
+        return <Navigate to={navigateUrl} replace />
+    }
 
     return (
         <div className="auth-container">

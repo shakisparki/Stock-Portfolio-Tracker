@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, Navigate } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 
-const Register: React.FC = () => {
+const Register: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    const url = useLocation();
+    const params = new URLSearchParams(url.search);
+    const redirectUrl = params.get("redirectUrl");
+    const navigateUrl = redirectUrl !== null && redirectUrl !== "" ? redirectUrl : "/dashboard";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,7 +34,7 @@ const Register: React.FC = () => {
             });
             if (response.ok) {
                 //onLogin();
-                navigate("/dashboard");
+                navigate(navigateUrl);
             } else {
                 const result = await response.json();
                 const firstErrorKey = Object.keys(result.errors)[0];
@@ -40,6 +45,10 @@ const Register: React.FC = () => {
             setError("Registration failed");
         }
     };
+
+    if (isLoggedIn) {
+        return <Navigate to={navigateUrl} replace />
+    }
 
     return (
         <div className="auth-container">

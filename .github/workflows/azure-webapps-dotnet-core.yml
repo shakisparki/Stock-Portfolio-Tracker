@@ -92,7 +92,7 @@ jobs:
 
       - name: Apply Identity Database Migrations
         run: |
-          dotnet tool install --global dotnet-ef
+          dotnet tool install --global dotnet-ef --version 9.0.10
           export PATH="$PATH:/home/runner/.dotnet/tools"
           dotnet ef database update --project ./Identity.Server/Identity.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioIdentityDbContext --connection "${{ secrets.CONNECTIONSTRINGS_IDENTITYCONNECTION }}"
 

@@ -33,7 +33,7 @@ const PortfolioTable: React.FC<Props> = ({ holdings, onRemove }) => {
                                 <td>{h.shares}</td>
                                 <td>${h.purchasePrice.toFixed(2)}</td>
                                 <td>{h.currentPrice !== null ? `$${h.currentPrice.toFixed(2)}` : "—"}</td>
-                                <td>{h.marketValue !== null ? `$${h.marketValue.toFixed(2)}` : "—"}</td>
+                                <td>{h.marketValue !== undefined && h.marketValue !== null ? `$${h.marketValue.toFixed(2)}` : "—"}</td>
                                 <td className={h.unrealizedPnL && h.unrealizedPnL >= 0 ? "pos" : "neg"}>
                                     {h.unrealizedPnL !== null ? `$${h.unrealizedPnL!.toFixed(2)}` : "—"}
                                 </td>

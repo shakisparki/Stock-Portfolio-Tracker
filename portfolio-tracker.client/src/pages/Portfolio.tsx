@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { HoldingWithMarket } from "../models/types";
 import { getPortfolio, getPrices, addHolding, removeHolding } from "../utils/api";
 import AddStockForm from "../components/AddStockForm";

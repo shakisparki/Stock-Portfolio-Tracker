@@ -19,9 +19,12 @@ export interface PortfolioResponse {
 }
 
 export interface PricesResponse {
-    [ticker: string]: {
-        currentPrice: number;
-        changePercent?: number;
-        historical?: { date: string; value: number }[]; // optional for charting
-    };
+    prices: Prices[];
+}
+
+export interface Prices {
+    ticker: string
+    currentPrice: number;
+    changePercent?: number;
+    historical?: { date: string; value: number }[]; // optional for charting
 }

@@ -20,7 +20,7 @@ function Portfolio() {
 
             const enriched: HoldingWithMarket[] = data.map((h) => {
                 const upper = h.ticker.toUpperCase();
-                const priceInfo = prices[upper];
+                const priceInfo = prices.prices.find(x=>x.ticker == upper);
                 const currentPrice = priceInfo?.currentPrice ?? null;
                 const marketValue = currentPrice !== null ? currentPrice * h.shares : null;
                 const costBasis = h.purchasePrice * h.shares;

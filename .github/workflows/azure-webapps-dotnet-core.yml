@@ -96,6 +96,12 @@ jobs:
           export PATH="$PATH:/home/runner/.dotnet/tools"
           dotnet ef database update --project ./Identity.Server/Identity.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioIdentityDbContext --connection "${{ secrets.CONNECTIONSTRINGS_IDENTITYCONNECTION }}"
 
+      - name: Apply Portfolio Database Migrations
+        run: |
+          dotnet tool install --global dotnet-ef --version 9.0.10
+          export PATH="$PATH:/home/runner/.dotnet/tools"
+          dotnet ef database update --project ./Data.Server/Data.Server.csproj --startup-project ./Portfolio-Tracker.Server/Portfolio-Tracker.Server.csproj --context PortfolioDbContext --connection "${{ secrets.CONNECTIONSTRINGS_PORTFOLIOCONNECTION }}"
+
       - name: Delist IP for Azure Postgre Server
         run: |
             az postgres flexible-server firewall-rule delete \

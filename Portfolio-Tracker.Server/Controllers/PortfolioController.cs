@@ -11,14 +11,14 @@ namespace Portfolio_Tracker.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PortfolioController(PortfolioDbContext portfolioDbContext) : ControllerBase
     {
         // GET: portfolio
         [HttpGet]
         public async Task<ActionResult<PortfolioResponse>> Get()
         {
-            var stockholdings = await portfolioDbContext.Stockholdings.Select(x=> new Portfolio {
+            var stockholdings = await portfolioDbContext.Stockholdings.Select(x=> new Holding {
                 Id = x.Id,
                 Ticker = x.Ticker,
                 Shares = x.Shares,
@@ -27,15 +27,15 @@ namespace Portfolio_Tracker.Server.Controllers
             }).ToListAsync();
             return Ok(new PortfolioResponse
             {
-                Portfolios = stockholdings
+                Holdings = stockholdings
             });
         }
 
         // GET portfolio/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Portfolio>> Get(int id)
+        public async Task<ActionResult<Holding>> Get(int id)
         {
-            var item = await portfolioDbContext.Stockholdings.Where(x => x.Id == id).Select(x => new Portfolio
+            var item = await portfolioDbContext.Stockholdings.Where(x => x.Id == id).Select(x => new Holding
             {
                 Id = x.Id,
                 Ticker = x.Ticker,
@@ -49,7 +49,7 @@ namespace Portfolio_Tracker.Server.Controllers
 
         // POST portfolio
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Portfolio value)
+        public async Task<ActionResult> Post([FromBody] Holding value)
         {
             var item = new Stockholdings
             {
@@ -65,7 +65,7 @@ namespace Portfolio_Tracker.Server.Controllers
 
         // PUT portfolio/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Portfolio value)
+        public async Task<ActionResult> Put(int id, [FromBody] Holding value)
         {
             var item = await portfolioDbContext.Stockholdings.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (item == null) {

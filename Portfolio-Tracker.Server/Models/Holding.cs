@@ -2,10 +2,10 @@
 {
     public class PortfolioResponse
     {
-        public List<Portfolio> Portfolios { get; set; } = [];
+        public List<Holding> Holdings { get; set; } = [];
     }
 
-    public class Portfolio
+    public class Holding
     {
         public int Id { get; set; }
         public required string Ticker { get; set; }

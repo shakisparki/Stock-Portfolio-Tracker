@@ -29,7 +29,7 @@ const AddStockForm: React.FC<Props> = ({ onAdd }) => {
             <h3>Add Holding</h3>
             <form onSubmit={handleSubmit} className="add-form">
                 <label>Ticker</label>
-                <input value={ticker} onChange={(e) => setTicker(e.target.value)} placeholder="AAPL" />
+                <input value={ticker} onChange={(e) => setTicker(e.target.value)} placeholder=" AAPL" />
 
                 <label>Shares</label>
                 <input type="number" value={shares} onChange={(e) => setShares(e.target.value === "" ? "" : Number(e.target.value))} min={0} step="any" />

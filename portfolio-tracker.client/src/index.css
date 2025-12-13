@@ -434,9 +434,13 @@ a.btn-primary, .btn-primary {
 
 .add-form input {
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px 0px;
     border-radius: 8px;
     border: 1px solid #e5e7eb;
+}
+
+.add-form button {
+    margin-top:14px;
 }
 
 .holdings-table {

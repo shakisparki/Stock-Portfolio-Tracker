@@ -13,19 +13,15 @@
   <ItemGroup>
     <Compile Remove="DTOs\**" />
     <Compile Remove="Identity\**" />
-    <Compile Remove="Models\**" />
     <Compile Remove="Services\**" />
     <Content Remove="DTOs\**" />
     <Content Remove="Identity\**" />
-    <Content Remove="Models\**" />
     <Content Remove="Services\**" />
     <EmbeddedResource Remove="DTOs\**" />
     <EmbeddedResource Remove="Identity\**" />
-    <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="Services\**" />
     <None Remove="DTOs\**" />
     <None Remove="Identity\**" />
-    <None Remove="Models\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 

@@ -2,6 +2,7 @@
 import React, { useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, TimeScale } from "chart.js";
+import type { ChartOptions } from "chart.js";   
 import 'chartjs-adapter-date-fns';
 import type { HoldingWithMarket } from "../models/types";
 import { computePortfolioHistory } from "../utils/portfolioComputations";
@@ -29,14 +30,14 @@ const PortfolioChart: React.FC<Props> = ({ holdings }) => {
         ],
     };
 
-    const options = {
+    const options:ChartOptions<"line">  = {
         responsive: true,
         plugins: {
             legend: { display: false },
-            tooltip: { mode: "index" as const, intersect: false },
+            tooltip: { mode: "index", intersect: false },
         },
         scales: {
-            x: { type: "time" as const, time: { unit: "day" } },
+            x: { type: "time", time: { unit: "day" } },
             y: { beginAtZero: false },
         },
     };

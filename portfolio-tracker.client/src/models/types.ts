@@ -12,6 +12,7 @@ export interface HoldingWithMarket extends StockHolding {
     changePercent?: number | null;
     marketValue?: number | null; // shares * currentPrice
     unrealizedPnL?: number | null; // marketValue - costBasis
+    historical?: { date: string; value: number }[]; // optional for charting
 }
 
 export interface PortfolioResponse {
@@ -26,5 +27,5 @@ export interface Prices {
     ticker: string
     currentPrice: number;
     changePercent?: number;
-    historical?: { date: string; value: number }[]; // optional for charting
+    historical?: { date: string; price: number }[]; // optional for charting
 }

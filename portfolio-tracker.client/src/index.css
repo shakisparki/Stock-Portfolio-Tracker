@@ -413,7 +413,7 @@ a.btn-primary, .btn-primary {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: 1fr 420px;
+    grid-template-columns: 1fr 620px;
     gap: 24px;
 }
 

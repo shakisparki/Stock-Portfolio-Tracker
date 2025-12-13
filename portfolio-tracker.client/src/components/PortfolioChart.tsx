@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, TimeScale } from "chart.js";
 import 'chartjs-adapter-date-fns';
 import type { HoldingWithMarket } from "../models/types";
-import { generateSyntheticSeries } from "../utils/generateSyntheticSeries";
+import { computePortfolioHistory } from "../utils/portfolioComputations";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, TimeScale);
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PortfolioChart: React.FC<Props> = ({ holdings }) => {
-    const series = useMemo(() => generateSyntheticSeries(holdings), [holdings]);
+    const series = useMemo(() => computePortfolioHistory(holdings), [holdings]);
 
     const chartData = {
         labels: series.labels,
@@ -29,23 +29,23 @@ const PortfolioChart: React.FC<Props> = ({ holdings }) => {
         ],
     };
 
-    //const options = {
-    //    responsive: true,
-    //    plugins: {
-    //        legend: { display: false },
-    //        tooltip: { mode: "index" as const, intersect: false },
-    //    },
-    //    scales: {
-    //        x: { type: "time" as const, time: { unit: "day" } },
-    //        y: { beginAtZero: false },
-    //    },
-    //};
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            tooltip: { mode: "index" as const, intersect: false },
+        },
+        scales: {
+            x: { type: "time" as const, time: { unit: "day" } },
+            y: { beginAtZero: false },
+        },
+    };
 
     return (
         <div className="card">
             <h3>Portfolio Value (30d)</h3>
             <div style={{ height: 300 }}>
-                <Line data={chartData} />
+                <Line data={chartData} options={options} />
             </div>
         </div>
     );

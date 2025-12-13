@@ -26,6 +26,7 @@ function Portfolio() {
                 const costBasis = h.purchasePrice * h.shares;
                 const unrealizedPnL = marketValue !== null ? marketValue - costBasis : null;
                 const changePercent = priceInfo?.changePercent ?? null;
+                const historical = priceInfo?.historical?.map(item => ({ date:item.date, value:item.price * h.shares }));
 
                 return {
                     ...h,
@@ -34,6 +35,7 @@ function Portfolio() {
                     marketValue,
                     unrealizedPnL,
                     changePercent,
+                    historical
                 };
             });
 

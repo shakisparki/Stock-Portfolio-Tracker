@@ -9,7 +9,7 @@ using Portfolio_Tracker.Server.Models;
 
 namespace Portfolio_Tracker.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class PortfolioController(PortfolioDbContext portfolioDbContext) : ControllerBase

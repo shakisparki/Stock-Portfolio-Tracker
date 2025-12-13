@@ -13,6 +13,11 @@ namespace Portfolio_Tracker.Server.Controllers
         [HttpGet]
         public PricesResponse Get([FromQuery] string tickers)
         {
+            var rand = new Random();
+            var basePrice = 100m + (decimal)(rand.NextDouble() * 1000.0);
+            var historical = GenerateRandomHistory(basePrice);
+            var currentPrice = basePrice + (basePrice * (decimal)(rand.NextDouble() * 0.10 - 0.05));
+            var changePercent = (basePrice - historical.Last().Price) / basePrice * 100;
             var tickersList = tickers.Split(',');
             return new PricesResponse
             {
@@ -20,17 +25,36 @@ namespace Portfolio_Tracker.Server.Controllers
                     new MarketPrice
                     {
                         Ticker = x.Trim(),
-                        CurrentPrice = 150.25m,
-                        ChangePercent = 1.5m,
-                        Historical =
-                        [
-                            new() { Date = DateTime.Now.AddDays(-1), Value = 148.00m },
-                            new() { Date = DateTime.Now.AddDays(-2), Value = 149.00m },
-                            new() { Date = DateTime.Now.AddDays(-3), Value = 147.50m }
-                        ]
+                        CurrentPrice = currentPrice,
+                        ChangePercent = changePercent,
+                        Historical = historical
                     }
                     )]
             };
+        }
+
+        public static List<HistoricalPrice> GenerateRandomHistory(decimal basePrice)
+        {
+            var history = new List<HistoricalPrice>();
+            var rand = new Random();
+
+            for (int i = 1; i <= 30; i++)
+            {
+                // Random daily variation: ±5%
+                decimal variationPercent = (decimal)(rand.NextDouble() * 0.10 - 0.05);
+                decimal price = basePrice + (basePrice * variationPercent);
+
+                history.Add(new HistoricalPrice
+                {
+                    Date = DateTime.UtcNow.Date.AddDays(-i),
+                    Price = Math.Round(price, 2)
+                });
+            }
+
+            // Sort oldest → newest (optional, but usually preferred for charts)
+            history.Sort((a, b) => a.Date.CompareTo(b.Date));
+
+            return history;
         }
     }
 }

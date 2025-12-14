@@ -13,14 +13,13 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-var kk = builder.Configuration.GetConnectionString("IdentityConnection");
 // Configure PostgreSQL database contexts
 builder.Services.AddDbContext<PortfolioIdentityDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("IdentityConnection"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("POSTGRESQLCONNSTR_IdentityConnection"))
     );
 
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PortfolioConnection"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("POSTGRESQLCONNSTR_PortfolioConnection"))
     );
 
 //builder.Services.AddAuthentication();

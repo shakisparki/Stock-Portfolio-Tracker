@@ -15,11 +15,11 @@ builder.Services.AddOpenApi();
 
 // Configure PostgreSQL database contexts
 builder.Services.AddDbContext<PortfolioIdentityDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("POSTGRESQLCONNSTR_IdentityConnection"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("IdentityConnection"))
     );
 
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("POSTGRESQLCONNSTR_PortfolioConnection"))
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PortfolioConnection"))
     );
 
 //builder.Services.AddAuthentication();

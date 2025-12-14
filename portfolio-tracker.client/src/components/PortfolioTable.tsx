@@ -12,7 +12,7 @@ const PortfolioTable: React.FC<Props> = ({ holdings, onRemove }) => {
         <div className="card">
             <h3>Your Holdings</h3>
             {holdings.length === 0 ? (
-                <p>No holdings yet — add a stock above.</p>
+                <p>No holdings yet. Add a stock above.</p>
             ) : (
                 <table className="holdings-table">
                     <thead>
@@ -32,10 +32,10 @@ const PortfolioTable: React.FC<Props> = ({ holdings, onRemove }) => {
                                 <td className="mono">{h.ticker}</td>
                                 <td>{h.shares}</td>
                                 <td>${h.purchasePrice.toFixed(2)}</td>
-                                <td>{h.currentPrice !== null ? `$${h.currentPrice.toFixed(2)}` : "—"}</td>
-                                <td>{h.marketValue !== undefined && h.marketValue !== null ? `$${h.marketValue.toFixed(2)}` : "—"}</td>
+                                <td>{h.currentPrice !== null ? `$${h.currentPrice.toFixed(2)}` : "â€”"}</td>
+                                <td>{h.marketValue !== undefined && h.marketValue !== null ? `$${h.marketValue.toFixed(2)}` : "â€”"}</td>
                                 <td className={h.unrealizedPnL && h.unrealizedPnL >= 0 ? "pos" : "neg"}>
-                                    {h.unrealizedPnL !== null ? `$${h.unrealizedPnL!.toFixed(2)}` : "—"}
+                                    {h.unrealizedPnL !== null ? `$${h.unrealizedPnL!.toFixed(2)}` : "â€”"}
                                 </td>
                                 <td>
                                     <button className="btn-ghost" onClick={() => onRemove(h.id)}>Remove</button>
